@@ -310,7 +310,7 @@ fn load_track(
         .get("track-artist")
         .unwrap()
         .set_text_content(Some(track.artist.as_str()));
-    random_gradient(&body)
+    random_gradient(body)
 }
 
 fn set_seek() {
@@ -328,7 +328,7 @@ fn set_volume() {
         .dyn_into::<HtmlInputElement>()
         .unwrap();
     volume_slider.set_value_as_number(volume_slider.value_as_number());
-    get_html_audio().set_volume(volume_slider.value_as_number() as f64 / 100.0)
+    get_html_audio().set_volume(volume_slider.value_as_number() / 100.0)
 }
 
 fn seek_update() {
@@ -367,14 +367,14 @@ fn play_track(in_play: &mut bool) {
 }
 
 fn pause_track(in_play: &mut bool) {
-    let _ = get_html_audio().pause().unwrap();
+    get_html_audio().pause().unwrap();
     *in_play = false;
     get_playpause().set_inner_html(r#"<i class="fa fa-play-circle fa-5x"></i>"#);
 }
 
 fn next_track(track_id: &mut usize, track_id_max: usize, in_play: &mut bool) {
     if *track_id < track_id_max {
-        *track_id = *track_id + 1;
+        *track_id += 1;
     } else {
         *track_id = 0;
     }
@@ -384,7 +384,7 @@ fn next_track(track_id: &mut usize, track_id_max: usize, in_play: &mut bool) {
 
 fn prev_track(track_id: &mut usize, track_id_max: usize, in_play: &mut bool) {
     if *track_id > 0 {
-        *track_id = *track_id - 1;
+        *track_id -= 1;
     } else {
         *track_id = track_id_max;
     }
@@ -402,7 +402,7 @@ fn query_classes(
             String::from(*class),
             document
                 .query_selector(&format!(".{}", class))?
-                .expect(&format!("document should have a {} class", class)),
+                .unwrap_or_else(|| panic!("document should have a {} class", class)),
         );
     }
     Ok(elems)
@@ -454,7 +454,7 @@ fn main() -> Result<(), JsValue> {
     audio_end.forget();
 
     let seek_slider = EventListener::new(
-        &elems.get("seek-slider").unwrap(),
+        elems.get("seek-slider").unwrap(),
         "change",
         move |_event| {
             set_seek();
@@ -463,7 +463,7 @@ fn main() -> Result<(), JsValue> {
     seek_slider.forget();
 
     let volume_slider = EventListener::new(
-        &elems.get("volume-slider").unwrap(),
+        elems.get("volume-slider").unwrap(),
         "change",
         move |_event| {
             set_volume();
@@ -472,7 +472,7 @@ fn main() -> Result<(), JsValue> {
     volume_slider.forget();
 
     let play_pause = EventListener::new(
-        &elems.get("playpause-track").unwrap(),
+        elems.get("playpause-track").unwrap(),
         "click",
         move |_event| {
             if !in_play {
@@ -484,12 +484,12 @@ fn main() -> Result<(), JsValue> {
     );
     play_pause.forget();
 
-    let prev = EventListener::new(&elems.get("prev-track").unwrap(), "click", move |_event| {
+    let prev = EventListener::new(elems.get("prev-track").unwrap(), "click", move |_event| {
         prev_track(&mut track_id, track_id_max, &mut in_play)
     });
     prev.forget();
 
-    let next = EventListener::new(&elems.get("next-track").unwrap(), "click", move |_event| {
+    let next = EventListener::new(elems.get("next-track").unwrap(), "click", move |_event| {
         next_track(&mut track_id, track_id_max, &mut in_play)
     });
     next.forget();
