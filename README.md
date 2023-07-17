@@ -3,6 +3,9 @@
   <h3>A simple wasm media player</h3>
   <a href="https://github.com/andros21/wasmplayer/actions/workflows/ci-cd.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/andros21/wasmplayer/ci-cd.yml?label=ci/cd&logo=github" alt="ci/cd">
+  <a href="https://github.com/andros21/rustracer/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/andros21/wasmplayer?color=blue&logo=gnu" alt="gpl3">
+  </a>
   </a>
   <br>
   <sub><strong>Random aknowledgements:</strong></sub>
