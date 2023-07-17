@@ -1,0 +1,98 @@
+---
+name: ci/cd
+
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - LICENSE
+      - README.md
+      - '.github/workflows/*'
+      - 'static/*'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - LICENSE
+      - README.md
+      - '.github/workflows/*'
+      - 'static/*'
+
+jobs:
+  build:
+    name: build wasmplayer
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout project
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+      - name: check cache
+        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        id: cache
+        with:
+          path: |
+            ~/.cargo/
+            ~/.rustup/
+            target/
+          key: ${{ runner.os }}-rust-all-${{ hashFiles('Cargo.toml') }}-${{ hashFiles('Cargo.lock') }}
+      - name: install rust toolchain
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - name: cargo fmt
+        run: |
+          cargo fmt -- --check --verbose
+      - name: cargo clippy
+        run: |
+          cargo clippy --locked --workspace
+      - name: install wasm-pack
+        uses: taiki-e/install-action@4efcb9aabfee0046e94203abe16b74c81238f190
+        with:
+          tool: wasm-pack
+          checksum: true
+      - name: build wasmplayer
+        run: |
+          wasm-pack build --release --target web
+      - name: upload wasmplayer
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        with:
+          name: wasmplayer
+          path: pkg/
+          if-no-files-found: error
+          retention-days: 1
+  deploy:
+    name: deploy wasmplayer
+    needs: build
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout project
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+      - name: download wasmplayer
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a
+        with:
+          name: wasmplayer
+          path: pkg/
+      - name: prepare wasmplayer
+        run: |
+          set -x
+          mkdir -p wasmplayer/pkg/
+          mv pkg/wasmplayer.js \
+             pkg/wasmplayer_bg.wasm \
+             wasmplayer/pkg/
+          mv static/ \
+             index.html \
+             style.css \
+             wasmplayer/
+      - name: publish to gh-pages
+        uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: wasmplayer/
