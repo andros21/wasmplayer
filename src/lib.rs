@@ -453,13 +453,10 @@ fn main() -> Result<(), JsValue> {
     });
     audio_end.forget();
 
-    let seek_slider = EventListener::new(
-        elems.get("seek-slider").unwrap(),
-        "change",
-        move |_event| {
+    let seek_slider =
+        EventListener::new(elems.get("seek-slider").unwrap(), "change", move |_event| {
             set_seek();
-        },
-    );
+        });
     seek_slider.forget();
 
     let volume_slider = EventListener::new(
