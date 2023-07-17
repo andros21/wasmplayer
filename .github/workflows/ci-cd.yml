@@ -10,7 +10,6 @@ name: ci/cd
       - LICENSE
       - README.md
       - '.github/workflows/*'
-      - 'static/*'
   pull_request:
     branches:
       - master
@@ -18,7 +17,6 @@ name: ci/cd
       - LICENSE
       - README.md
       - '.github/workflows/*'
-      - 'static/*'
 
 jobs:
   build:
@@ -87,9 +85,8 @@ jobs:
           mv pkg/wasmplayer.js \
              pkg/wasmplayer_bg.wasm \
              wasmplayer/pkg/
-          mv static/ \
+          mv assets/ \
              index.html \
-             style.css \
              wasmplayer/
       - name: publish to gh-pages
         uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847

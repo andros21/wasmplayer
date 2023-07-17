@@ -1,7 +1,5 @@
-// https://github.com/sayantanm19/js-music-player/blob/master/index.html
-// https://blog.orhun.dev/zero-deps-random-in-rust/
-// https://stackoverflow.com/questions/75811136/how-to-add-an-event-listener-to-some-html-element-from-rust-which-calls-a-trivia
-//
+// wasmplayer
+// ==========
 
 use gloo_events::EventListener;
 use gloo_timers::callback::Interval;
@@ -35,7 +33,6 @@ const PLAYLIST: &str = r#"
 ]
 "#;
 
-// https://github.com/itmeo/webgradients
 const GRADIENTS: [&str; 172] = [
     "linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)",
     "linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%)",
