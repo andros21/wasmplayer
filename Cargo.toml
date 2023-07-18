@@ -8,6 +8,15 @@ readme = "README.md"
 repository = "https://github.com/andros21/wasmplayer"
 homepage = "https://github.com/andros21/wasmplayer"
 description = "a simple wasm media player"
+keywords = [
+   "gh-pages",
+   "media-player",
+   "music-player",
+   "wasm",
+   "wasm-bindgen",
+   "wasm-pack",
+   "web",
+]
 
 [lib]
 crate-type = ["cdylib"]
@@ -22,7 +31,6 @@ serde_json = "1.0.48"
 [dependencies.web-sys]
 version = "0.3.4"
 features = [
-   'console',
    'Node',
    'Window',
    'Document',
