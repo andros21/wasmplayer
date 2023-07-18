@@ -36,8 +36,8 @@
       <audio class="audio-player"></audio>
     <!-- Load wasmplayer -->
     <script type="module">
-    import init from './pkg/wasmplayer.js';
-    window.wasm = await init('./pkg/wasmplayer_bg.wasm');
+    import init, { main } from './pkg/wasmplayer.js';
+    init().then(() => { main() });
     </script>
   </body>
 </html>
