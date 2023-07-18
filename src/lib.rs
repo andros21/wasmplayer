@@ -13,22 +13,16 @@ use web_sys::{Document, Element, HtmlAudioElement, HtmlElement, HtmlInputElement
 const PLAYLIST: &str = r#"
 [
   {
-    "title": "Night Owl",
-    "artist": "Broke For Free",
-    "cover": "https://images.pexels.com/photos/3100835/pexels-photo-3100835.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
-    "audio": "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3"
+    "title": "Spam!",
+    "artist": "Waedsday",
+    "cover": "https://sliminio.fly.dev/wasmplayer/c3BhbSEK/Y292ZXIK.png",
+    "audio": "https://sliminio.fly.dev/wasmplayer/c3BhbSEK/YXVkaW8K.ogg"
   },
   {
-    "title": "Enthusiast",
-    "artist": "Tours",
-    "cover": "https://images.pexels.com/photos/3100835/pexels-photo-3100835.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
-    "audio": "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3"
-  },
-  {
-    "title": "Shipping Lanes",
-    "artist": "Chad Crouch",
-    "cover": "https://images.pexels.com/photos/1717969/pexels-photo-1717969.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
-    "audio": "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Shipping_Lanes.mp3"
+    "title": "I for Her to You",
+    "artist": "Pino & Ennio",
+    "cover": "https://sliminio.fly.dev/wasmplayer/SSBmb3IgSGVyIHRvIFlvdQo%3D/Y292ZXIK.png",
+    "audio": "https://sliminio.fly.dev/wasmplayer/SSBmb3IgSGVyIHRvIFlvdQo%3D/YXVkaW8K.ogg"
   }
 ]
 "#;
