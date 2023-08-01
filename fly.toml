@@ -1,0 +1,26 @@
+# fly.toml app configuration file generated for sliminio on 2023-07-19T16:07:28+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "sliminio"
+primary_region = "ams"
+
+[experimental]
+entrypoint = ["/usr/bin/minio", "server", "/data"]
+auto_rollback = true
+
+[mounts]
+source = "sliminiodata"
+destination = "/data"
+
+[http_service]
+internal_port = 9000
+force_https = true
+min_machines_running = 1
+processes = ["app"]
+
+[http_service.concurrency]
+type = "requests"
+hard_limit = 25
+soft_limit = 20

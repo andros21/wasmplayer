@@ -9,6 +9,7 @@ name: ci/cd
     paths-ignore:
       - LICENSE
       - README.md
+      - fly.toml
       - '.github/workflows/*'
       - '.github/dependabot.yaml'
   pull_request:
@@ -17,6 +18,7 @@ name: ci/cd
     paths-ignore:
       - LICENSE
       - README.md
+      - fly.toml
       - '.github/workflows/*'
       - '.github/dependabot.yaml'
 
