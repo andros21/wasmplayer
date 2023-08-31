@@ -31,6 +31,12 @@ jobs:
     steps:
       - name: checkout project
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744
+      - name: rust stable latest
+        id: rust
+        run: |
+          latest="$(curl -sL https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r .tag_name)"
+          echo "rust stable latest: ${latest}"
+          echo "stable_latest=${latest}" >> "$GITHUB_OUTPUT"
       - name: check cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         id: cache
@@ -39,12 +45,7 @@ jobs:
             ~/.cargo/
             ~/.rustup/
             target/
-          key: ${{ runner.os }}-rust-all-${{ hashFiles('Cargo.toml') }}-${{ hashFiles('Cargo.lock') }}
-      - name: install rust toolchain
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy, rustfmt
+          key: ${{ runner.os }}-rust-${{ steps.rust.outputs.stable_latest }}-${{ hashFiles('Cargo.toml') }}-${{ hashFiles('Cargo.lock') }}
       - name: cargo fmt
         run: |
           cargo fmt -- --check --verbose
