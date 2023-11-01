@@ -8,6 +8,13 @@ updates:
       time: "07:00"
       timezone: "Europe/Rome"
     rebase-strategy: "disabled"
+    groups:
+      poetry:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
