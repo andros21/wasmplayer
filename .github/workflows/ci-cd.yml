@@ -53,7 +53,7 @@ jobs:
         run: |
           cargo clippy --locked --workspace
       - name: install wasm-pack
-        uses: taiki-e/install-action@d211c4be5a95cbcd52a0870dda7d63a107a58368
+        uses: taiki-e/install-action@6ee6c3ab83eab434138dfa928d72abc7eae14793
         with:
           tool: wasm-pack
           checksum: true
