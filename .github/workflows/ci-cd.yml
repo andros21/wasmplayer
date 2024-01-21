@@ -38,7 +38,7 @@ jobs:
           echo "rust stable latest: ${latest}"
           echo "stable_latest=${latest}" >> "$GITHUB_OUTPUT"
       - name: check cache
-        uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c
+        uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2
         id: cache
         with:
           path: |
