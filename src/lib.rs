@@ -4,9 +4,8 @@
 use gloo_events::EventListener;
 use gloo_timers::callback::Interval;
 use serde::Deserialize;
-use std::collections::hash_map::RandomState;
 use std::collections::HashMap;
-use std::hash::{BuildHasher, Hasher};
+use std::hash::{BuildHasher, Hasher, RandomState};
 use wasm_bindgen::prelude::*;
 use web_sys::{Document, Element, HtmlAudioElement, HtmlElement, HtmlInputElement};
 
