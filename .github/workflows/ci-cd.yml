@@ -37,6 +37,9 @@ jobs:
           latest="$(curl -sL https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r .tag_name)"
           echo "rust stable latest: ${latest}"
           echo "stable_latest=${latest}" >> "$GITHUB_OUTPUT"
+          echo "rust stable used: ${used}"
+          used="$(cargo --version | awk '{print $2}')"
+          echo "stable_used=${used}" >> "$GITHUB_OUTPUT"
       - name: check cache
         uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2
         id: cache
@@ -46,6 +49,10 @@ jobs:
             ~/.rustup/
             target/
           key: ${{ runner.os }}-rust-${{ steps.rust.outputs.stable_latest }}-${{ hashFiles('Cargo.toml') }}-${{ hashFiles('Cargo.lock') }}
+      - name: update toolchain
+        if: steps.rust.outputs.stable_latest != steps.rust.outputs.stable_used
+        run: |
+          rustup update stable
       - name: cargo fmt
         run: |
           cargo fmt -- --check --verbose
