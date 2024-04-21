@@ -68,7 +68,7 @@ jobs:
         run: |
           wasm-pack build --release --target web
       - name: upload wasmplayer
-        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3
+        uses: actions/upload-artifact@1746f4ab65b179e0ea60a494b83293b640dd5bba
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         with:
           name: wasmplayer
