@@ -30,7 +30,7 @@ jobs:
       contents: read
     steps:
       - name: checkout project
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f
       - name: rust stable latest
         id: rust
         run: |
@@ -84,7 +84,7 @@ jobs:
       contents: write
     steps:
       - name: checkout project
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f
       - name: download wasmplayer
         uses: actions/download-artifact@8caf195ad4b1dee92908e23f56eeb0696f1dd42d
         with:
