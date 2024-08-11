@@ -19,7 +19,7 @@ jobs:
       - name: checkout project
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - name: install cosign
-        uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20
+        uses: sigstore/cosign-installer@4959ce089c160fddf62f7b42464195ba1a56d382
       - name: verify minio image
         run: |
           cosign verify \
