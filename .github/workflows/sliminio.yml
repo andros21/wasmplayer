@@ -17,7 +17,7 @@ jobs:
       name: sliminio
     steps:
       - name: checkout project
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
       - name: install cosign
         uses: sigstore/cosign-installer@4959ce089c160fddf62f7b42464195ba1a56d382
       - name: verify minio image
