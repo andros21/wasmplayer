@@ -18,21 +18,12 @@ jobs:
     steps:
       - name: checkout project
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: install cosign
-        uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb
-      - name: verify minio image
-        run: |
-          cosign verify \
-             --certificate-identity \
-            'https://github.com/chainguard-images/images/.github/workflows/release.yaml@refs/heads/main' \
-            --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' \
-             "cgr.dev/chainguard/minio:latest" | jq .
       - name: flyio setup
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: flyio deploy
         run: |
           set -x
-          docker pull cgr.dev/chainguard/minio:latest
-          flyctl deploy --local-only --image cgr.dev/chainguard/minio:latest
+          docker pull docker.io/minio/minio:latest
+          flyctl deploy --local-only --image docker.io/minio/minio:latest
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

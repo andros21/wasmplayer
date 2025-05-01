@@ -7,7 +7,6 @@ app = "sliminio"
 primary_region = "ams"
 
 [experimental]
-entrypoint = ["/usr/bin/minio", "server", "/data"]
 auto_rollback = true
 
 [mounts]
@@ -24,3 +23,7 @@ processes = ["app"]
 type = "requests"
 hard_limit = 25
 soft_limit = 20
+
+[[vm]]
+size = "shared-cpu-1x"
+memory = "512mb"
