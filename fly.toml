@@ -7,6 +7,7 @@ app = "sliminio"
 primary_region = "ams"
 
 [experimental]
+cmd = ["minio", "server", "/data"]
 auto_rollback = true
 
 [mounts]
