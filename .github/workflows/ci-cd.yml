@@ -12,6 +12,7 @@ name: ci/cd
       - fly.toml
       - '.github/workflows/*'
       - '.github/dependabot.yaml'
+      - '.github/CODEOWNERS'
   pull_request:
     branches:
       - master
@@ -21,6 +22,7 @@ name: ci/cd
       - fly.toml
       - '.github/workflows/*'
       - '.github/dependabot.yaml'
+      - '.github/CODEOWNERS'
 
 jobs:
   build:
