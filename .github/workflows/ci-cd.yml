@@ -43,7 +43,7 @@ jobs:
           echo "rust stable used: ${used}"
           echo "stable_used=${used}" >> "$GITHUB_OUTPUT"
       - name: check cache
-        uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
         id: cache
         with:
           path: |
